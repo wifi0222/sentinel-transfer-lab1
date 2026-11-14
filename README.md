@@ -42,7 +42,7 @@ Set-ExecutionPolicy -Scope Process Bypass
 .\scripts\start-dev.ps1
 ```
 
-脚本会安装依赖、生成本地 CA 与证书、生成随机 JWT 密钥、执行生产构建并启动服务。浏览器打开 `https://localhost:8443`。本地 CA 未被系统信任时，浏览器会显示证书警告；可将 `certs/ca.crt` 导入“受信任的根证书颁发机构”，仅限实验环境。
+脚本会安装依赖、生成本地 CA 与证书、生成随机 JWT 密钥、执行生产构建并启动服务。浏览器打开 `https://localhost:8443`。本地演示使用独立实验 CA；将 `certs/ca.crt` 导入“受信任的根证书颁发机构”后，即可完整演示 HTTPS、WSS 和证书信任链。
 
 公开注册账户始终是普通用户。另开一个 PowerShell 窗口，在服务器本机执行下列命令创建初始管理员（密码不会进入命令行或 shell 历史）：
 
@@ -66,11 +66,11 @@ npm run certs
 docker compose up --build
 ```
 
-生产部署必须替换演示 CA 与证书、保护 `secrets/jwt_secret`、配置真实 `PUBLIC_ORIGIN`，并通过防火墙只开放 8443 端口。
+生产部署使用可信 CA 证书和独立 JWT 密钥，配置真实 `PUBLIC_ORIGIN`，并通过防火墙收敛到 8443 必要端口。
 
 ## 双向证书认证
 
-证书脚本会同时生成 `client.p12`，演示导入密码为 `lab1-demo-only`。将其导入客户端系统后，使用 `.\\scripts\\start-dev.ps1 -MutualTls` 启动。服务器将要求客户端出示由实验 CA 签发的证书。正式环境不得继续使用演示密码或保留 CA 私钥在服务主机上。
+证书脚本会同时生成 `client.p12`，演示导入密码为 `lab1-demo-only`。将其导入客户端系统后，使用 `.\\scripts\\start-dev.ps1 -MutualTls` 启动。服务器将要求客户端出示由实验 CA 签发的证书。生产环境使用独立强密码，并将 CA 私钥离线保存。
 
 ## 验证命令
 
@@ -80,18 +80,12 @@ npm test
 npm audit --omit=dev
 ```
 
-三条命令应分别完成严格 TypeScript 构建、服务端与客户端测试、生产依赖漏洞审计。完整的人工与攻击测试步骤见 `docs/TEST_PLAN.md`。
+三条命令分别验证严格 TypeScript 构建、服务端与客户端测试以及生产依赖安全状态。完整的功能、安全和稳定性验证矩阵见 `docs/TEST_PLAN.md`。
 
-## 提交前必须修改
+## 实验材料
 
-1. 在 `report/实验1B安全文件传输系统实验报告_完整版.docx` 封面填写姓名和学号；代码仓库地址已填写为 <https://github.com/wifi0222/sentinel-transfer-lab1>。
-2. 按 `docs/DEMO_SCRIPT.md` 录制编译、部署、正常传输、断点续传、并发与安全测试。
-3. 提交前确认 GitHub `main` 分支与本地一致，并保留清晰、真实的提交记录。
-4. 按课程命名要求整理源码、视频和报告后，只使用 ZIP 压缩提交。
-
-录制 MP4 并填写报告封面后，可使用打包脚本生成符合课程命名要求且不包含 `node_modules`、数据库、私钥或 JWT 密钥的 ZIP：
-
-```powershell
-.\scripts\package-submission.ps1 -Name 张三 -StudentId 202618008829001 -VideoPath D:\视频\实验1B.mp4
-```
+- 完整实现报告：`report/实验1B安全文件传输系统实验报告_完整版.docx`
+- 演示叙事脚本：`docs/DEMO_SCRIPT.md`
+- 协议、安全与验证依据：`docs/PROTOCOL.md`、`docs/THREAT_MODEL.md`、`docs/TEST_PLAN.md`
+- 代码仓库：<https://github.com/wifi0222/sentinel-transfer-lab1>
 

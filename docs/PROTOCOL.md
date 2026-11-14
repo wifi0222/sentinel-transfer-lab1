@@ -49,5 +49,5 @@ sequenceDiagram
   C->>C: verify whole SHA-256
 ```
 
-`offset` 允许客户端从指定字节继续下载。Web 客户端在支持 File System Access API 的 Chromium 浏览器中直接流式写入用户选择的文件；连接中断时使用已持久写入的字节数作为新偏移，最多自动恢复三次。旧浏览器回退为内存组装，并对大于 256 MiB 的文件主动拒绝，以避免内存耗尽。
+`offset` 允许客户端从指定字节继续下载。Chromium 浏览器通过 File System Access API 直接流式写入用户选择的文件；连接中断时使用已持久写入的字节数作为新偏移，最多自动恢复三次。兼容路径采用内存组装，并设置 256 MiB 安全阈值，使不同浏览器都具备明确的资源边界。
 
