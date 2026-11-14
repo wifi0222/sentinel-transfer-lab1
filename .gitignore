@@ -1,0 +1,23 @@
+node_modules/
+dist/
+data/
+certs/*.key
+certs/*.pem
+certs/*.crt
+certs/*.p12
+!certs/.gitkeep
+.env
+secrets/
+coverage/
+*.log
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+~$*
+
+# Local QA/export artifacts; keep only the final Word report in version control.
+report/实验1B安全文件传输系统实验报告.docx
+report/实验1B安全文件传输系统实验报告.pdf
+

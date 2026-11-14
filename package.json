@@ -1,0 +1,33 @@
+{
+  "name": "sft-lab1",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Secure, resumable file transfer over a custom WSS application protocol",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:server dev:web",
+    "dev:server": "npm --workspace server run dev",
+    "dev:web": "npm --workspace web run dev",
+    "build": "npm --workspace web run build && npm --workspace server run build",
+    "test": "npm --workspace server test && npm --workspace web test",
+    "test:server": "npm --workspace server test",
+    "test:e2e": "node scripts/e2e-test.mjs",
+    "lint": "npm --workspace server run lint && npm --workspace web run lint",
+    "start": "npm --workspace server start",
+    "admin:create": "powershell -ExecutionPolicy Bypass -File scripts/create-admin.ps1",
+    "certs": "powershell -ExecutionPolicy Bypass -File scripts/generate-certs.ps1"
+  },
+  "devDependencies": {
+    "cookie": "^1.0.2",
+    "npm-run-all": "^4.1.5"
+  },
+  "overrides": {
+    "cookie": "$cookie"
+  },
+  "engines": {
+    "node": ">=20.15"
+  }
+}

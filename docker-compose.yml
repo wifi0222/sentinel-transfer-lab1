@@ -1,0 +1,46 @@
+services:
+  sft:
+    build: .
+    restart: unless-stopped
+    init: true
+    user: "10001:10001"
+    read_only: true
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 8443
+      PUBLIC_ORIGIN: https://localhost:8443
+      JWT_SECRET_FILE: /run/secrets/jwt_secret
+      DATA_DIR: /app/data
+      TLS_ENABLED: "true"
+      TLS_CERT_PATH: /run/certs/server.crt
+      TLS_KEY_PATH: /run/certs/server.key
+      MTLS_ENABLED: "false"
+      TLS_CA_PATH: /run/certs/ca.crt
+    ports:
+      - "8443:8443"
+    volumes:
+      - sft_data:/app/data
+      - ./certs:/run/certs:ro
+      - ./secrets/jwt_secret:/run/secrets/jwt_secret:ro
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "node", "server/dist/healthcheck.js"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1G
+
+volumes:
+  sft_data:
+
