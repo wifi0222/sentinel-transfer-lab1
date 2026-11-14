@@ -341,7 +341,7 @@ set_font(p.add_run("实现级实验报告"), 13, True, MUTED)
 meta = doc.add_table(rows=5, cols=2)
 for i, (k, v) in enumerate((
     ("姓名", "请填写"), ("学号", "请填写"), ("课程", "软件与系统安全"),
-    ("代码仓库", "请填写 GitHub Gitee 或 GitLab 地址"), ("完成日期", "2026 年 11 月 14 日"),
+    ("代码仓库", "https://github.com/wifi0222/sentinel-transfer-lab1"), ("完成日期", "2026 年 11 月 14 日"),
 )):
     meta.rows[i].cells[0].text = k
     meta.rows[i].cells[1].text = v

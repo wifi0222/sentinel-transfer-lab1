@@ -255,7 +255,7 @@ set_run_font(p.add_run("Sentinel Transfer"), size=18, bold=True, color=RGBColor(
 p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before = Inches(1.1)
 set_run_font(p.add_run("基于 HTTPS WSS 与自定义分块协议的可恢复文件传输系统"), size=12)
 meta = doc.add_table(rows=5, cols=2); meta.alignment = WD_TABLE_ALIGNMENT.CENTER
-for i, (key, value) in enumerate((("姓名", "请填写"), ("学号", "请填写"), ("课程", "软件与系统安全"), ("代码仓库", "请填写 GitHub Gitee 或 GitLab 地址"), ("完成日期", "2026 年 11 月 10 日"))):
+for i, (key, value) in enumerate((("姓名", "请填写"), ("学号", "请填写"), ("课程", "软件与系统安全"), ("代码仓库", "https://github.com/wifi0222/sentinel-transfer-lab1"), ("完成日期", "2026 年 11 月 10 日"))):
     meta.rows[i].cells[0].text = key; meta.rows[i].cells[1].text = value
 style_table(meta, [1.35, 4.65])
 doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

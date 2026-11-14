@@ -84,9 +84,9 @@ npm audit --omit=dev
 
 ## 提交前必须修改
 
-1. 在 `report/实验1B安全文件传输系统实验报告.docx` 封面填写姓名、学号和 Git 仓库地址。
+1. 在 `report/实验1B安全文件传输系统实验报告_完整版.docx` 封面填写姓名和学号；代码仓库地址已填写为 <https://github.com/wifi0222/sentinel-transfer-lab1>。
 2. 按 `docs/DEMO_SCRIPT.md` 录制编译、部署、正常传输、断点续传、并发与安全测试。
-3. 将代码推送到 GitHub、Gitee 或 GitLab，确保提交记录完整。
+3. 提交前确认 GitHub `main` 分支与本地一致，并保留清晰、真实的提交记录。
 4. 按课程命名要求整理源码、视频和报告后，只使用 ZIP 压缩提交。
 
 录制 MP4 并填写报告封面后，可使用打包脚本生成符合课程命名要求且不包含 `node_modules`、数据库、私钥或 JWT 密钥的 ZIP：
