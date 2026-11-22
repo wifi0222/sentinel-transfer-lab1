@@ -28,7 +28,6 @@ server/       Fastify 服务端、WSS 协议、认证、存储和测试
 web/          Vue 客户端、并发传输队列、完整性校验和测试
 scripts/      证书、密钥和本地启动脚本
 docs/         威胁模型、测试方案、协议说明和演示脚本
-report/       可提交的实验报告
 certs/        本地 CA、服务端及客户端证书（密钥被 Git 忽略）
 data/         运行数据（被 Git 忽略）
 ```
